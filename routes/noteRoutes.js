@@ -64,4 +64,4 @@ router.delete('/notes/:id', (req, res) => {
   })
 })
 
-moldule.exports = router
+module.exports = router
