@@ -18,6 +18,7 @@ router.post('/notes', (req, res) => {
       let note = {
         id: uuid.v1(),
         text: req.body.text,
+        title: req.body.title
       }
       notes.push(note)
 
@@ -29,25 +30,6 @@ router.post('/notes', (req, res) => {
     })
 })
 
-router.put('/notes/:id', (req, res) => {
-  fs.readFile(join(__dirname, '..', 'db', 'db.json'),
-    'utf8', (err, data) => {
-      if (err) { console.log(err) }
-
-      let notes = JSON.parse(data)
-
-      for (let i = 0; i < notes.length; i++) {
-        if (notes[i].id === req.params.id)
-      }
-
-    fs.writeFile(join(__dirname, '..', 'db', 'db.json'),
-    JSON.stringify(notes), err => {
-      if (err) { console.log(err) }
-
-      res.sendStatus(200)
-    })
-  })
-})
 
 router.delete('/notes/:id', (req, res) => {
   fs.readFile(join(__dirname, '..', 'db', 'db.json'),
@@ -56,6 +38,7 @@ router.delete('/notes/:id', (req, res) => {
 
   let notes = JSON.parse(data)
   notes = notes.filter(note => note.id !== req.params.id)
+  
 
   fs.writeFile(join(__dirname, '..', 'db', 'db.json'), JSON.stringify(items), err => {
     if (err) {console.log(err)}
